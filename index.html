@@ -42,11 +42,12 @@
         var userAgent = window.navigator.userAgent.toLowerCase();
         var safari = /safari/.test(userAgent),
             mobile = /Mobile/.test(userAgent),
-            isIOS = /iphone|ipod|ipad/.test(userAgent),
+            isMacLike = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform),
+            isIOS = /(iPhone|iPod|iPad)/i.test(navigator.platform),
             isAndroid = /android/i.test(navigator.userAgent);
 
         // Check if this web page opening in native app's web view or browser
-        if ((isIOS && !safari) || (isAndroid && userAgent.includes('wv'))) {
+        if ((isIOS && !safari) || (isMacLike && !safari) || (isAndroid && userAgent.includes('wv'))) {
             isWebView = true;
         }
         return isWebView;
