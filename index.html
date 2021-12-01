@@ -12,13 +12,14 @@
             color: #fff;
         }
 
-        #msg {
+        #view-msg {
             border: 1px solid #fff;
             padding: 15px;
             height: 61px;
             width: auto;
         }
-        #ua{
+
+        #user-agent-data {
             margin-top: 10px;
         }
     </style>
@@ -29,15 +30,13 @@
     <h1>MY USER AGENT!</h1>
 
     <section>
-
-        <div id="msg"> </div>
-
-        <div id="ua"> </div>
+        <div id="view-msg"> </div>
+        <div id="user-agent-data"> </div>
     </section>
 </body>
 <script>
 
-
+    // Detect if web page or applicaion opened through webview of ios/andriod or browser
     function isMobileWebView() {
         var isWebView = false;
         var userAgent = window.navigator.userAgent.toLowerCase();
@@ -46,37 +45,22 @@
             isIOS = /iphone|ipod|ipad/.test(userAgent),
             isAndroid = /android/i.test(navigator.userAgent);
 
-        if (isIOS) {
-            if (safari) {
-                //browser
-            } else if (!safari) {
-                isWebView = true;
-            };
-        } else if (isAndroid) {
-            if (userAgent.includes('wv')) {
-                isWebView = true;
-                // Android webview
-            } else {
-                // Chrome or any browser
-            }
-        } else {
-            // Not iOS or Andriod
+        // Check if this web page opening in native app's web view or browser
+        if ((isIOS && !safari) || isAndroid && userAgent.includes('wv')) {
+            isWebView = true;
         }
         return isWebView;
     }
 
-    var msg = document.getElementById('msg');
-    var ua = document.getElementById('ua');
+    // Show information on UI screen
+    var msg = document.getElementById('view-msg');
+    var ua = document.getElementById('user-agent-data');
 
     if (isMobileWebView()) {
-
         msg.innerHTML = "<h1>You are viewing in WebView </h1>"
-
     } else {
         msg.innerHTML = "<h1>You are viewing in Browser </h1>"
     }
-
-
     ua.textContent = window.navigator.userAgent.toLowerCase();
 
 
