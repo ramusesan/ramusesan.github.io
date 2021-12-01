@@ -1,12 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 2rem;
+            background-color: rgb(163, 109, 214);
+            color: #fff;
+        }
+
+        #msg {
+            border: 1px solid #fff;
+            padding: 15px;
+            height: 61px;
+            width: auto;
+        }
+        #ua{
+            margin-top: 10px;
+        }
+    </style>
     <title>Document</title>
 </head>
+
 <body>
-    <h1>Hello world...!</h1>
+    <h1>MY USER AGENT!</h1>
+
+    <section>
+
+        <div id="msg"> </div>
+
+        <div id="ua"> </div>
+    </section>
 </body>
+<script>
+
+
+    function isMobileWebView() {
+        var isWebView = false;
+        var userAgent = window.navigator.userAgent.toLowerCase();
+        var safari = /safari/.test(userAgent),
+            mobile = /Mobile/.test(userAgent),
+            isIOS = /iphone|ipod|ipad/.test(userAgent),
+            isAndroid = /android/i.test(navigator.userAgent);
+
+        if (isIOS) {
+            if (safari) {
+                //browser
+            } else if (!safari) {
+                isWebView = true;
+            };
+        } else if (isAndroid) {
+            if (userAgent.includes('wv')) {
+                isWebView = true;
+                // Android webview
+            } else {
+                // Chrome or any browser
+            }
+        } else {
+            // Not iOS or Andriod
+        }
+        return isWebView;
+    }
+
+    var msg = document.getElementById('msg');
+    var ua = document.getElementById('ua');
+
+    if (isMobileWebView) {
+
+        msg.innerHTML = "<h1>You are viewing in WebView </h1>"
+
+    } else {
+        msg.innerHTML = "<h1>You are viewing in Browser </h1>"
+    }
+
+
+    ua.textContent = window.navigator.userAgent.toLowerCase();
+
+
+</script>
+
 </html>
