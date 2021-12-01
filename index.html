@@ -46,7 +46,7 @@
             isAndroid = /android/i.test(navigator.userAgent);
 
         // Check if this web page opening in native app's web view or browser
-        if ((isIOS && !safari) || isAndroid && userAgent.includes('wv')) {
+        if ((isIOS && !safari) || (isAndroid && userAgent.includes('wv'))) {
             isWebView = true;
         }
         return isWebView;
